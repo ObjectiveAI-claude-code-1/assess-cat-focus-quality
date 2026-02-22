@@ -1,0 +1,8 @@
+Analyze Focus Precision and Intentionality on the Cat's Key Features
+The function must determine whether the photographer's focus point is directed at the cat and specifically at the most communicative features—the eyes, face, and head. This task involves assessing whether these key features are rendered sharp and in-focus, and evaluating whether the placement of sharp focus aligns with the photographer's apparent intention to emphasize the cat as the subject. The goal is to understand whether the technical execution of focus supports the artistic vision.
+
+Evaluate Fine Detail Clarity, Preservation, and Depth of Field Appropriateness
+The function must examine how clearly and crisply the fine details of the cat are rendered—including fur texture, whiskers, eye definition, and facial features. Simultaneously, it must assess whether the depth of field (the zone of sharp focus) is appropriate for the composition, determining whether the background blur or sharpness supports the visual communication of the image. Together, these elements reveal whether the photograph achieves sufficient visual clarity about the cat's specific characteristics while maintaining compositional balance.
+
+Judge Overall Visual Communication and Photographic Impact
+The function must evaluate whether the photograph as a whole effectively conveys the cat's presence, character, and personality to the viewer. This holistic assessment determines how well the focus precision, detail clarity, and depth of field work together to create a coherent visual communication. The goal is to measure whether the image successfully honors both the photographer's intention and the cat's presence, resulting in an image that feels authentic, meaningful, and visually engaging.

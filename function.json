@@ -1,0 +1,143 @@
+{
+  "type": "scalar.function",
+  "input_schema": {
+    "type": "object",
+    "description": "A single cat photo with its URL and optional metadata",
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "The URL or file path to the cat photo image"
+      },
+      "title": {
+        "type": "string",
+        "description": "An optional title or label for the photo"
+      },
+      "photographer": {
+        "type": "string",
+        "description": "An optional credit to the photographer"
+      }
+    },
+    "required": [
+      "url"
+    ]
+  },
+  "tasks": [
+    {
+      "type": "vector.completion",
+      "messages": {
+        "$jmespath": "[{role: 'user', content: [{type: 'image_url', image_url: {url: input.url}}, {type: 'text', text: 'Assess the focus precision in this cat photograph. How sharp and in-focus are the cat\\'s eyes and face? Is the focus clearly positioned on these key features?'}]}]"
+      },
+      "responses": [
+        [
+          {
+            "type": "text",
+            "text": "The cat's eyes and face are perfectly sharp and in-focus, serving as the clear focal point with excellent detail and clarity throughout these features."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The cat's eyes and face are mostly in focus with adequate sharpness, though some fine detail could be crisper in certain areas."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The cat's eyes or face lack sharpness, or the focus point is not clearly positioned on these key features, resulting in soft or unclear details."
+          }
+        ]
+      ],
+      "output": {
+        "$starlark": "output['scores'][0] * 1.0 + output['scores'][1] * 0.5 + output['scores'][2] * 0.0"
+      }
+    },
+    {
+      "type": "vector.completion",
+      "messages": {
+        "$jmespath": "[{role: 'user', content: [{type: 'image_url', image_url: {url: input.url}}, {type: 'text', text: 'Evaluate the clarity and preservation of fine details in this cat photograph. How well are fine details like fur texture, whiskers, eyes, and facial features rendered and preserved through sharp focus?'}]}]"
+      },
+      "responses": [
+        [
+          {
+            "type": "text",
+            "text": "The fine details are rendered with excellent clarity—fur texture is crisp, whiskers are sharp and distinct, eyes are detailed and expressive, and all facial features are beautifully preserved."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "Fine details are visible and reasonably clear, though some areas could show crisper detail—fur texture is somewhat visible but not pristine, and some facial features lack the sharpest definition."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "Fine details are soft, unclear, or inadequately preserved. Fur texture lacks definition, whiskers are indistinct, and facial features are not rendered with sufficient clarity."
+          }
+        ]
+      ],
+      "output": {
+        "$starlark": "output['scores'][0] * 1.0 + output['scores'][1] * 0.5 + output['scores'][2] * 0.0"
+      }
+    },
+    {
+      "type": "vector.completion",
+      "messages": {
+        "$jmespath": "[{role: 'user', content: [{type: 'image_url', image_url: {url: input.url}}, {type: 'text', text: 'Assess the depth of field and background handling in this cat photograph. Does the depth of field appropriately frame the cat as the subject? Does the background blur or sharpness support the photographic composition and intent?'}]}]"
+      },
+      "responses": [
+        [
+          {
+            "type": "text",
+            "text": "The depth of field is excellently executed—the cat is perfectly framed as the subject with appropriate background treatment that either beautifully isolates the cat or contextualizes it effectively."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The depth of field is adequate, framing the cat as the main subject with reasonable background treatment, though the composition could be slightly more refined."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The depth of field poorly serves the composition—the cat is not well-isolated or contextualized, and the background treatment distracts from or confuses the intended subject."
+          }
+        ]
+      ],
+      "output": {
+        "$starlark": "output['scores'][0] * 1.0 + output['scores'][1] * 0.5 + output['scores'][2] * 0.0"
+      }
+    },
+    {
+      "type": "vector.completion",
+      "messages": {
+        "$jmespath": "[{role: 'user', content: [{type: 'image_url', image_url: {url: input.url}}, {type: 'text', text: 'Judge the overall visual communication and photographic impact of this cat image. Does the photograph effectively convey the cat\\'s presence, character, and personality? How well do the focus, sharpness, depth of field, and composition work together to create a meaningful image?'}]}]"
+      },
+      "responses": [
+        [
+          {
+            "type": "text",
+            "text": "This photograph powerfully communicates the cat\\'s presence and character. The focus, clarity, depth of field, and composition all work together harmoniously to create a compelling, authentic image that honors both the photographer\\'s intent and the cat\\'s essence."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The photograph adequately conveys the cat\\'s presence with decent visual communication. The technical and compositional elements work together reasonably well, though there\\'s room for improvement in overall impact."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The photograph fails to effectively communicate the cat\\'s presence or character. The combination of focus, composition, and other elements does not create a compelling or meaningful visual communication."
+          }
+        ]
+      ],
+      "output": {
+        "$starlark": "output['scores'][0] * 1.0 + output['scores'][1] * 0.5 + output['scores'][2] * 0.0"
+      }
+    }
+  ],
+  "description": "Evaluates the focus precision, sharpness, and clarity of cat photographs by assessing focus accuracy on the cat's eyes, fine detail preservation, depth of field appropriateness, and overall visual communication. Returns a scalar score from 0 to 1 reflecting the photograph's focus quality and visual impact."
+}
